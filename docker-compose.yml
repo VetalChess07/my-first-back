@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db # Указываем имя сервиса db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=2005
+      - DB_NAME=postgres
+    depends_on:
+      - db
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/tsconfig.json:/app/tsconfig.json
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2005
+      POSTGRES_DB: postgres
+    ports:
+      - "5436:5432" # Порт, который будет слушать база данных
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    ports:
+      - "5051:80"
+    depends_on:
+      - db    
+
+volumes:
+  pgdata:

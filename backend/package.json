@@ -1,0 +1,35 @@
+{
+  "name": "add-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nodemon --exec 'node --loader ts-node/esm' src/main.ts",
+    "build": "rimraf ./build && npx tsc",
+    "start": "npm run build && node/build/main",
+    "lint": "npx eslint ./src",
+    "start-docker": "node app.js",
+    "dev-docker": "nodemon -L app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.10",
+    "@types/pg": "^8.11.11",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.22.0",
+    "nodemon": "^3.1.9",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.14.1"
+  }
+}
